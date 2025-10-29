@@ -152,6 +152,7 @@ int main(void)
         case KVM_EXIT_HLT:
             puts("KVM_EXIT_HLT");
             return 0;
+        //start
         case KVM_EXIT_IO:
             if (run->io.direction == KVM_EXIT_IO_OUT && run->io.size == 1 && run->io.port == 0x3f8 && run->io.count == 1) {
                 char data = *(((char *)run) + run->io.data_offset);
@@ -159,6 +160,7 @@ int main(void)
             } else
                 errx(1, "unhandled KVM_EXIT_IO");
             break;
+        //end
         case KVM_EXIT_FAIL_ENTRY:
             errx(1, "KVM_EXIT_FAIL_ENTRY: hardware_entry_failure_reason = 0x%llx",
                  (unsigned long long)run->fail_entry.hardware_entry_failure_reason);
